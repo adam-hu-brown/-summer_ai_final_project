@@ -19,7 +19,7 @@ def minimax(asp: AdversarialSearchProblem[GameState, Action]) -> Action:
         an action (an element of asp.get_available_actions(asp.get_start_state()))
     """
     player = asp.get_start_state().player_to_move()
-    score, move = max_value(asp, asp.get_start_state())
+    value, move = max_value(asp, asp.get_start_state())
     return move
     ...
 
@@ -27,20 +27,20 @@ def max_value(asp, state):
     if asp.is_terminal_state(state):
         return asp.evaluate_terminal(state), None
     v = [float('-inf'), float('-inf')]
-    for action in asp.get_available_actions(state):
-        v2, a2 = min_value(asp, asp.transition(state, action))
+    for a in asp.get_available_actions(state):
+        v2, a2 = min_value(asp, asp.transition(state, a))
         if v2[state.player_to_move()] > v[state.player_to_move()]:
-            v, move = v2, action
+            v, move = v2, a
     return v, move
 
 def min_value(asp, state):
     if asp.is_terminal_state(state):
         return asp.evaluate_terminal(state), None
     v = [float('inf'), float('inf')]
-    for action in asp.get_available_actions(state):
-        v2, a2 = min_value(asp, asp.transition(state, action))
+    for a in asp.get_available_actions(state):
+        v2, a2 = min_value(asp, asp.transition(state, a))
         if v2[state.player_to_move()] < v[state.player_to_move()]:
-            v, move = v2, action
+            v, move = v2, a
     return v, move
     
 
