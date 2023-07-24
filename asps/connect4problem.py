@@ -17,7 +17,7 @@ from typing import Tuple
 from adversarialsearchproblem import AdversarialSearchProblem, GameUI, GameState
 from . import connect4utils as c4utils
 import numpy as np
-import pygame
+#import pygame
 import sys
 
 
