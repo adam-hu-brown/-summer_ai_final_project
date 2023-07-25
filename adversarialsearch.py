@@ -26,24 +26,12 @@ def minimax(asp: AdversarialSearchProblem[GameState, Action]) -> Action:
 def max_value(asp, state):
     if asp.is_terminal_state(state):
         return asp.evaluate_terminal(state), None
-    v = [float('-inf'), float('-inf')]
+    v = [-math.inf, -math.inf]
     for a in asp.get_available_actions(state):
-        v2, a2 = min_value(asp, asp.transition(state, a))
+        v2, a2 = max_value(asp, asp.transition(state, a))
         if v2[state.player_to_move()] > v[state.player_to_move()]:
             v, move = v2, a
     return v, move
-
-def min_value(asp, state):
-    if asp.is_terminal_state(state):
-        return asp.evaluate_terminal(state), None
-    v = [float('inf'), float('inf')]
-    for a in asp.get_available_actions(state):
-        v2, a2 = min_value(asp, asp.transition(state, a))
-        if v2[state.player_to_move()] < v[state.player_to_move()]:
-            v, move = v2, a
-    return v, move
-    
-
 
 def alpha_beta(asp: AdversarialSearchProblem[GameState, Action]) -> Action:
     """
