@@ -27,11 +27,13 @@ def max_value(asp, state):
     if asp.is_terminal_state(state):
         return asp.evaluate_terminal(state), None
     v = [-math.inf, -math.inf]
+    move = None
     for a in asp.get_available_actions(state):
         v2, a2 = max_value(asp, asp.transition(state, a))
-        if v2[state.player_to_move()] > v[state.player_to_move()]:
+        if move == None or v2[state.player_to_move()] > v[state.player_to_move()]:
             v, move = v2, a
     return v, move
+
 
 def alpha_beta(asp: AdversarialSearchProblem[GameState, Action]) -> Action:
     """
@@ -43,8 +45,24 @@ def alpha_beta(asp: AdversarialSearchProblem[GameState, Action]) -> Action:
     Output:
         an action(an element of asp.get_available_actions(asp.get_start_state()))
     """
-    ...
+    player = asp.get_start_state().player_to_move()
+    value, move = ab_max_value(asp, asp.get_start_state(), -math.inf, math.inf)
+    return move
 
+
+def ab_max_value(asp, state, alpha, beta):
+    if asp.is_terminal_state(state):
+        return asp.evaluate_terminal(state), None
+    v = [-math.inf, -math.inf]
+    move = None
+    for a in asp.get_available_actions(state):
+        v2, a2 = ab_max_value(asp, asp.transition(state, a), alpha, beta)
+        if move == None or v2[state.player_to_move()] > v[state.player_to_move()]:
+            v, move = v2, a
+            alpha = max(alpha, v[state.player_to_move()])
+        if v[state.player_to_move()] >= beta:
+            return v, move
+    return v, move
 
 def alpha_beta_cutoff(
     asp: AdversarialSearchProblem[GameState, Action],
