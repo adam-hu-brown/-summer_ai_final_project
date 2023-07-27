@@ -1,0 +1,33 @@
+1. Introduction
+
+My task is to implement minimax or alpha-beta pruning
+to play tic-tac-toe and connect-4. 
+With the help of the pseudocode from the textbook and 
+the assignment description, I should make a working algorithm
+that will play tic-tac-toe and connect-4. 
+
+2. Methods
+
+I tried to pretty much exactly replicate the pseudocode from the
+textbook, except I had to figure out how to implement it into
+this program. After figuring out the variables and functions of
+this program, I was able to write the code for minimax and 
+alpha beta pruning with little problems. I ran into a problem
+when my program was not choosing the optimal moves, but I had been
+using both the min and max functions from the pseudocode, and I 
+found that using the max function recursively worked. This is because
+the computer should want to maximize their score, not minimize. 
+
+3. Results
+
+When playing tic-tac-toe, I was able to get both alpha-beta pruning
+and minimax to pick out the optimal moves 100% of the time. However, 
+when I try to run connect-4, neither work and once player 1 makes a 
+move, the program doesn't make a move and is stuck loading in the 
+next move. I don't know if this is a result of connect-4 being a 
+more complicated game than tic-tac-toe, but it doesn't have any errors
+so I just have to guess that the search algorithm is running but 
+is too slow for an advanced game like connect 4. 
+
+4. Discussion
+
