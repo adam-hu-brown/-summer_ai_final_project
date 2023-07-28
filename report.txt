@@ -31,3 +31,7 @@ is too slow for an advanced game like connect 4.
 
 4. Discussion
 
+Based on my results, if I had more time I would dedicate more time to 
+making the connect-4 game work. I would also dedicate time to making the
+alpha-beta cutoff work. 
+
